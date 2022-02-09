@@ -27,27 +27,37 @@ std::string exec(const std::string& command) {
 }
 
 int main() {
-    int n,method;
+    int n;
     std::string prg, file1, file2;
 
     //тут має читатись
     //std::cin>>n>>prg>>file1>>file2;
     n = 10;
-    method = 1;
     prg = "/mnt/d/UCU/AKS/Lab1_double_convert_to_str/cmake-build-debug/Lab1_double_convert_to_str";
-    file1 = "file1.txt";
-    file2 = "file2.txt";
+    file1 = "/mnt//d//UCU//AKS//Lab1_double_convert_to_str//cmake-build-debug//file1.txt";//"file1.txt";
+    file2 = "/mnt//d//UCU//AKS//Lab1_double_convert_to_str//cmake-build-debug//file2.txt";//"file2.txt";
 
-    std::string s;
-    s+=prg;
-    s+=" " + std::to_string(method);
-    s+=" " + file1;
-    s+=" " + file2;
+    //j - number of method
+    for(size_t j = 1;j<=3;j++){
+        long long min = INTMAX_MAX;
+        std::string s;
+        s+=prg;
+        s+=" " + std::to_string(j);
+        s+=" " + file1;
+        s+=" " + file2;
 
-    //записує у файл file2.txt що у Lab1_script
-    for(size_t i=0; i<n; i++){
-        std::string new_s = exec(s);
-        //std::cout<<new_s;
+        //записує у файл file2.txt що у Lab1_script
+        for(size_t i=0; i<n; i++){
+            std::string f = exec(s);
+            //std::cout<<f<<std::endl;
+            long long new_s = stoll(f);
+            if(new_s < min) {
+                min = new_s;
+                //std::cout<<new_s<<std::endl;
+            }
+            //std::cout<<new_s<<std::endl;
+        }
+        std::cout<<"Method "<<j<<": "<<min<<std::endl;
     }
 
     return 0;
